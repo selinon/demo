@@ -1,0 +1,86 @@
+version: '2'
+services:
+
+  # Celery broker
+
+  broker:
+    image: rabbitmq:3.6.1
+    container_name: celeriac-broker
+    network_mode: bridge
+    ports:
+      - '5672:5672'
+
+  flower:
+    image: endocode/flower
+    container_name: celeriac-flower
+    network_mode: bridge
+    ports:
+      - '31000:5555'
+    links:
+      - broker
+    environment:
+      RABBITMQ_SERVICE_SERVICE_HOST: broker
+
+  # Databases
+
+  redis:
+    image: redis:3.2.1
+    container_name: celeriac-redis
+    network_mode: bridge
+    ports:
+      - '6379:6379'
+
+  mongo:
+    image: mongo:3.3
+    container_name: celeriac-mongo
+    network_mode: bridge
+    ports:
+      - '27017:27017'
+
+  postgres:
+    image: postgres:9.5
+    container_name: celeriac-postgres
+    network_mode: bridge
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  # Demo
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    container_name: celeriac-server
+    volumes:
+      - ./server:/home/worker/server
+    network_mode: bridge
+    privileged: true
+    ports:
+      - '5000:5000'
+    links:
+      - broker
+      - redis
+      - mongo
+    environment:
+      BROKER_URL: 'amqp://broker:5672'
+      RESULT_BACKEND_URL: 'redis://redis:6379/0'
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile-worker
+    volumes:
+      - ./worker:/home/worker/worker
+      - ./server/config:/home/worker/worker/config
+    network_mode: bridge
+    privileged: true
+    links:
+      - broker
+      - redis
+      - mongo
+    environment:
+      BROKER_URL: 'amqp://broker:5672'
+      RESULT_BACKEND_URL: 'redis://redis:6379/0'

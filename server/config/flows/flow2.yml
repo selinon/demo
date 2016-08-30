@@ -1,0 +1,16 @@
+---
+    flow-definitions:
+        - name: "flow2"
+          edges:
+              - from:
+                to:
+                  - "Task4"
+                condition:
+                    name: "alwaysTrue"
+
+              - from:
+                  - "Task4"
+                to:
+                  - "Task5"
+                condition:
+                    name: "alwaysTrue"
