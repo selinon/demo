@@ -64,8 +64,7 @@ class ServerFlowInfo(object):
         cls._init_system()
         flow_usage = {}
         for flow in cls._system.flows:
-            # TODO: add used nodes
-            flow_usage[flow.name] = []
+            flow_usage[flow.name] = ", ".join(sorted([node.name for node in flow.all_used_nodes()]))
 
         return render_template(FLOWS_TEMPLATE, flow_usage=flow_usage)
 

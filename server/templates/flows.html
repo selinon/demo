@@ -107,7 +107,7 @@
      <th class="col-md-3">Flow name</th>
      <th class="col-md-7">Nodes in flow</th>
   </tr>
-{% for flow_name, task_names in flow_usage.items() %}
+{% for flow_name, node_names in flow_usage.items() %}
   <tr>
     <td>
       <center>
@@ -120,7 +120,7 @@
       </center>
     </td>
     <td><h5>{{flow_name}}</h5></td>
-    <td><h5>TODO</h5></td>
+    <td><h5>{{node_names}}</h5></td>
   </tr>
 {% endfor %}
 </table>
