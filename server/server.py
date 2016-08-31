@@ -4,8 +4,6 @@ from flask import Flask, send_from_directory, abort, Response, jsonify, request,
 from werkzeug.utils import secure_filename
 from .serverFlowInfo import ServerFlowInfo, YAML_FILES_DIR, CONFIG_PY_PATH
 
-import sys
-
 GRAPH_DIR = os.path.join(YAML_FILES_DIR, 'graphs')
 UPLOAD_DIR = 'uploads'
 
