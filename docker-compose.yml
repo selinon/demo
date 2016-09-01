@@ -113,6 +113,7 @@ services:
       - broker
       - redis
       - mongo
+      - postgres
     environment:
       BROKER_URL: 'amqp://broker:5672'
       RESULT_BACKEND_URL: 'redis://redis:6379/0'
