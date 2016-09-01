@@ -4,7 +4,7 @@ ENV LANG=en_US.utf8
 
 RUN groupadd worker && useradd --create-home --home-dir /home/worker -g worker worker
 
-RUN dnf install -y python3 python3-pip git make graphviz
+RUN dnf install -y python3 python3-pip git make graphviz python3-psycopg2
 
 COPY requirements.txt /tmp
 RUN pip3 install -r /tmp/requirements.txt
