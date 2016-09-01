@@ -47,6 +47,39 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
+  # Database frondends
+
+  redis-commander:
+    image: emmenko/redis-commander:0.3.2
+    container_name: celeriac-redis-commander
+    network_mode: bridge
+    links:
+      - redis
+    ports:
+      - '8081:8081'
+    command: ['--redis-port', '6379', '--redis-host', 'redis']
+
+  mongo-express:
+    image: mongo-express
+    container_name: celeriac-mongo-express
+    network_mode: bridge
+    links:
+      - mongo
+    ports:
+      - '8082:8081'
+
+  pgweb:
+    image: sosedoff/pgweb
+    container_name: celeriac-pgweb
+    network_mode: bridge
+    links:
+      - postgres
+    ports:
+      - '8083:8081'
+    environment:
+      # sslmode=disable because: https://github.com/sosedoff/pgweb/issues/23#issuecomment-60840307
+      DATABASE_URL: 'postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable'
+
   # Demo
 
   server:
