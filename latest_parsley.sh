@@ -10,3 +10,5 @@
     git --no-pager log -1
 )
 
+./parsley/parsley-cli.py -nodes server/config/nodes.yml -flow server/config/flows/* -dump server/config/config.py
+
