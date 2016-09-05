@@ -1,22 +1,41 @@
 ---
     tasks:
-        - name: "Task1"
+        - name: "FactTask"
           import: "tasks"
-
-        - name: "Task2"
+          storage: "SqlStorage"
+        - name: "SumTask"
           import: "tasks"
-
-        - name: "Task3"
+          storage: "RedisStorage"
+        - name: "MulTask"
           import: "tasks"
-
-        - name: "Task4"
+          storage: "MongoStorage"
+        - name: "FallbackTask"
           import: "tasks"
-
-        - name: "Task5"
-          import: "tasks"
-
 
     flows:
-        - "flow1"
-        - "flow2"
+        - "mainFlow"
+        - "factorialFlow"
+
+
+    storages:
+        - name: "SqlStorage"
+          import: "celeriac.storage"
+          configuration:
+            connection_string: 'postgres://postgres:postgres@postgres:5432/postgres'
+
+        - name: "RedisStorage"
+          import: "celeriac.storage"
+          configuration:
+            host: 'redis'
+            port: 6379
+            db: 1
+            charset: 'utf-8'
+
+        - name: "MongoStorage"
+          import: "celeriac.storage"
+          configuration:
+            db_name: 'database_name'
+            collection_name: 'collection_name'
+            host: 'mongo'
+            port: 27017
 

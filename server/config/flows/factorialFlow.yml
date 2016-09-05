@@ -1,0 +1,21 @@
+---
+    flow-definitions:
+        - name: "factorialFlow"
+          edges:
+              - from:
+                to: "FactTask"
+                condition:
+                   name: "alwaysTrue"
+
+              - from: "FactTask"
+                to: "FactTask"
+                condition:
+                  and:
+                    - name: "fieldExist"
+                      args:
+                        key: 'num'
+                    - not:
+                        name: "fieldEqual"
+                        args:
+                          key: 'num'
+                          value: 1

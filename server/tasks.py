@@ -1,4 +1,4 @@
-import argparse
+import sys
 from celery import Celery
 from celeriac import CeleriacTask, Dispatcher
 from celeriac.config import Config
@@ -7,35 +7,37 @@ app = Celery('tasks')
 app.config_from_object('celeryconfig')
 
 
-class Task1(CeleriacTask):
+class FactTask(CeleriacTask):
     def execute(self, args):
-        return {'foo': 'bar'}
+        if 'FactTask' in self.parent:
+            prev_result = self.parent_task_result('FactTask')
+            num = prev_result['num'] - 1
+            res = prev_result['value'] * num
+        else:
+            assert(args['n'] > 1)
+            res = args['n']
+            num = args['n']
+        return {'value': res, 'num': num}
 
 
-class Task2(CeleriacTask):
+class SumTask(CeleriacTask):
     def execute(self, args):
-        return {'foo': 'bar'}
+        res = args['n'] + args['m']
+        return {'value': res}
 
 
-class Task3(CeleriacTask):
+class MulTask(CeleriacTask):
     def execute(self, args):
-        return {'foo': 'bar'}
+        fact_result = self.parent_flow_result('factorialFlow', 'FactTask', -1)
+        sum_result = self.parent_task_result('SumTask')
+        res = sum_result['value'] * fact_result['value']
+        return {'value': res}
 
 
-
-class Task4(CeleriacTask):
+class FallbackTask(CeleriacTask):
     def execute(self, args):
-        return {'foo': 'bar'}
+        print("We are in FallbackTask", file=sys.stderr)
 
-
-class Task5(CeleriacTask):
-    def execute(self, args):
-        return {'foo': 'bar'}
-
-
-class Task6(CeleriacTask):
-    def execute(self, args):
-        return {'foo': 'bar'}
 
 Config.trace_by_logging()
 Config.set_config_py('config/config.py')

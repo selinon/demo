@@ -1,22 +1,21 @@
 #!/usr/bin/env python
-# auto-generated using Parsley v58e6228
+# auto-generated using Parsley v0.1.0a1 on unused-4-104.brq.redhat.com at 2016-09-05 05:29:27.264675
 
-from parsley.predicates import alwaysTrue
-
-# Tasks
-from tasks import Task1
-from tasks import Task2
-from tasks import Task3
-from tasks import Task4
-from tasks import Task5
+from parsley.predicates import alwaysTrue, httpStatus, fieldEqual, fieldExist
+from tasks import FactTask
+from tasks import SumTask
+from tasks import MulTask
+from tasks import FallbackTask
+from celeriac.storage import SqlStorage
+from celeriac.storage import RedisStorage
+from celeriac.storage import MongoStorage
 
 
 task_classes = {
-    'Task1': Task1,
-    'Task2': Task2,
-    'Task3': Task3,
-    'Task4': Task4,
-    'Task5': Task5
+    'FactTask': FactTask,
+    'SumTask': SumTask,
+    'MulTask': MulTask,
+    'FallbackTask': FallbackTask
 }
 
 def get_task_instance(task_name, flow_name, parent):
@@ -28,17 +27,24 @@ def get_task_instance(task_name, flow_name, parent):
 ################################################################################
 
 task2storage_mapping = {
-
+    'FactTask': 'SqlStorage',
+    'SumTask': 'RedisStorage',
+    'MulTask': 'MongoStorage'
 }
 
+_storage_SqlStorage = SqlStorage(connection_string='postgres://postgres:postgres@postgres:5432/postgres')
+_storage_RedisStorage = RedisStorage(db=1, host='redis', port=6379, charset='utf-8')
+_storage_MongoStorage = MongoStorage(db_name='database_name', collection_name='collection_name', host='mongo', port=27017)
 storage2instance_mapping = {
-
+    'SqlStorage': _storage_SqlStorage,
+    'RedisStorage': _storage_RedisStorage,
+    'MongoStorage': _storage_MongoStorage
 }
 
 ################################################################################
 
 def is_flow(name):
-    return name in ['flow1', 'flow2']
+    return name in ['mainFlow', 'factorialFlow']
 
 ################################################################################
 
@@ -48,50 +54,65 @@ output_schemas = {
 ################################################################################
 
 propagate_finished = {
-    'flow1': False,
-    'flow2': False
+    'mainFlow': True,
+    'factorialFlow': False
 }
 
 propagate_node_args = {
-    'flow1': False,
-    'flow2': False
+    'mainFlow': True,
+    'factorialFlow': False
 }
 
 propagate_parent = {
-    'flow1': False,
-    'flow2': False
+    'mainFlow': False,
+    'factorialFlow': False
 }
 
 ################################################################################
 
 max_retry = {
-    'Task1': 1,
-    'Task2': 1,
-    'Task3': 1,
-    'Task4': 1,
-    'Task5': 1
+    'FactTask': 0,
+    'SumTask': 0,
+    'MulTask': 0,
+    'FallbackTask': 0
+}
+
+retry_countdown = {
+    'FactTask': 5,
+    'SumTask': 5,
+    'MulTask': 5,
+    'FallbackTask': 5
 }
 
 ################################################################################
 
 time_limit = {
-    'Task1': 3600,
-    'Task2': 3600,
-    'Task3': 3600,
-    'Task4': 3600,
-    'Task5': 3600
+    'FactTask': None,
+    'SumTask': None,
+    'MulTask': None,
+    'FallbackTask': None
 }
 
 ################################################################################
 
+_mainFlow_fail_SumTask_factorialFlow = {'next': {}, 'fallback': ['FallbackTask']}
+_mainFlow_fail_SumTask = {'next': {'factorialFlow': _mainFlow_fail_SumTask_factorialFlow}, 'fallback': []}
+_mainFlow_fail_factorialFlow = {'next': {'SumTask': _mainFlow_fail_SumTask_factorialFlow}, 'fallback': []}
+
+_mainFlow_failure_starting_nodes = {
+    'SumTask': _mainFlow_fail_SumTask,
+    'factorialFlow': _mainFlow_fail_factorialFlow
+}
+
 failures = {
+    'mainFlow': _mainFlow_failure_starting_nodes
 }
 
 ################################################################################
 
 nowait_nodes = {
-    'flow1': [],
-    'flow2': []
+    'mainFlow': [],
+    'factorialFlow': []
 }
 
 ################################################################################
@@ -101,29 +122,32 @@ def init():
 
 ################################################################################
 
-def _condition_flow1_0(db):
+def _condition_mainFlow_0(db, node_args):
+    return httpStatus(status=200, path='/', host='example.com')
+
+
+def _condition_mainFlow_1(db, node_args):
     return alwaysTrue()
 
 
-def _condition_flow1_1(db):
+def _condition_factorialFlow_0(db, node_args):
     return alwaysTrue()
 
 
-def _condition_flow2_0(db):
-    return alwaysTrue()
-
-
-def _condition_flow2_1(db):
-    return alwaysTrue()
+def _condition_factorialFlow_1(db, node_args):
+    return (
+fieldExist(message=db.get('factorialFlow', 'FactTask'), key='num') and 
+(not 
+fieldEqual(message=db.get('factorialFlow', 'FactTask'), key='num', value=1)))
 
 
 ################################################################################
 
 edge_table = {
-    'flow1': [{'from': [], 'to': ['Task1'], 'condition': _condition_flow1_0},
-              {'from': ['Task1'], 'to': ['Task2', 'flow2'], 'condition': _condition_flow1_1}],
-    'flow2': [{'from': [], 'to': ['Task4'], 'condition': _condition_flow2_0},
-              {'from': ['Task4'], 'to': ['Task5'], 'condition': _condition_flow2_1}]
+    'mainFlow': [{'from': [], 'to': ['factorialFlow', 'SumTask'], 'condition': _condition_mainFlow_0},
+                 {'from': ['factorialFlow', 'SumTask'], 'to': ['MulTask'], 'condition': _condition_mainFlow_1}],
+    'factorialFlow': [{'from': [], 'to': ['FactTask'], 'condition': _condition_factorialFlow_0},
+                      {'from': ['FactTask'], 'to': ['FactTask'], 'condition': _condition_factorialFlow_1}]
 }
 
 ################################################################################

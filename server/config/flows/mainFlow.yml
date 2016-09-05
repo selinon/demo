@@ -1,0 +1,30 @@
+---
+    flow-definitions:
+        - name: "mainFlow"
+          propagate_node_args: true
+          propagate_finished: true
+          edges:
+              - from:
+                to:
+                  - 'factorialFlow'
+                  - 'SumTask'
+                condition:
+                    name: "httpStatus"
+                    args:
+                      host: 'example.com'
+                      path: '/'
+                      status: 200
+
+              - from:
+                  - 'factorialFlow'
+                  - 'SumTask'
+                to: "MulTask"
+                condition:
+                    name: "alwaysTrue"
+                    node: 'SumTask'
+          failures:
+            - nodes:
+               - 'factorialFlow'
+               - 'SumTask'
+              fallback:
+               - 'FallbackTask'
