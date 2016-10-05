@@ -4,7 +4,7 @@ ENV LANG=en_US.utf8
 
 RUN groupadd worker && useradd --create-home --home-dir /home/worker -g worker worker
 
-RUN dnf install -y python3 python3-pip git make graphviz python3-psycopg2
+RUN dnf install -y git make graphviz python3-psycopg2
 
 COPY requirements.txt /tmp
 RUN pip3 install -r /tmp/requirements.txt
@@ -15,20 +15,12 @@ RUN pip3 install 'https://github.com/celery/billiard/zipball/master#egg=billiard
  pip3 install 'https://github.com/celery/kombu/zipball/master#egg=kombu' &&\
  pip3 install 'https://github.com/celery/vine/zipball/master#egg=vine'
 
-# Set up Parsley
-COPY version_parsley.txt /home/worker/
-RUN git clone https://github.com/fridex/parsley /home/worker/parsley &&\
- cd /home/worker/parsley &&\
- git checkout `cat /home/worker/version_parsley.txt` &&\
- make install
+# Set up Selinonlib and Selinon
+RUN pip3 install -U git+https://github.com/fridex/selinonlib \
+ git+https://github.com/fridex/selinon
 
-# Set up Celeriac
-COPY version_celeriac.txt /home/worker/
-RUN git clone https://github.com/fridex/celeriac /home/worker/celeriac &&\
- cd /home/worker/celeriac &&\
- git checkout `cat /home/worker/version_celeriac.txt` &&\
- make install &&\
- make check
+# We use additional storages that are not listed in requirements.txt explicitly
+RUN pip3 install pymongo SQLAlchemy SQLAlchemy-Utils
 
 # Use volume
 WORKDIR /home/worker/server

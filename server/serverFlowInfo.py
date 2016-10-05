@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 import os
 import shutil
-from parsley import System
+from selinonlib import System
 from flask import render_template
 
 from celery import Celery
-from celeriac import  Dispatcher
-from celeriac.config import Config
+from selinon import Dispatcher, Config
 
 FLOWS_TEMPLATE = 'flows.html'
 YAML_FILES_DIR = os.path.join(os.getcwd(), 'config')

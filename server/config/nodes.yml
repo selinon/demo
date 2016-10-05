@@ -19,12 +19,12 @@
 
     storages:
         - name: "SqlStorage"
-          import: "celeriac.storage"
+          import: "selinon.storage.sqlStorage"
           configuration:
             connection_string: 'postgres://postgres:postgres@postgres:5432/postgres'
 
         - name: "RedisStorage"
-          import: "celeriac.storage"
+          import: "selinon.storage.redisStorage"
           configuration:
             host: 'redis'
             port: 6379
@@ -32,7 +32,7 @@
             charset: 'utf-8'
 
         - name: "MongoStorage"
-          import: "celeriac.storage"
+          import: "selinon.storage.mongoStorage"
           configuration:
             db_name: 'database_name'
             collection_name: 'collection_name'

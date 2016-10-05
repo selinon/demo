@@ -1,14 +1,17 @@
-#!/usr/bin/env python
-# auto-generated using Parsley v0.1.0a1 on unused-4-104.brq.redhat.com at 2016-09-05 05:29:27.264675
+#!/usr/bin/env python3
+# auto-generated using Selinonlib v0.1.0rc3 on 1c010ed07619 at 2016-10-05 11:54:07.815240
 
-from parsley.predicates import alwaysTrue, httpStatus, fieldEqual, fieldExist
-from tasks import FactTask
-from tasks import SumTask
-from tasks import MulTask
-from tasks import FallbackTask
-from celeriac.storage import SqlStorage
-from celeriac.storage import RedisStorage
-from celeriac.storage import MongoStorage
+from selinonlib.predicates import fieldEqual, httpStatus, alwaysTrue, fieldExist
+from tasks import FactTask as FactTask
+from tasks import SumTask as SumTask
+from tasks import MulTask as MulTask
+from tasks import FallbackTask as FallbackTask
+from selinon.storage.sqlStorage import SqlStorage
+from selinon.storage.redisStorage import RedisStorage
+from selinon.storage.mongoStorage import MongoStorage
+
+import functools
+from selinonlib.strategies import biexponential_increase as _strategy_function
 
 
 task_classes = {
@@ -18,11 +21,20 @@ task_classes = {
     'FallbackTask': FallbackTask
 }
 
-def get_task_instance(task_name, flow_name, parent):
+task_queues = {
+    'FactTask': 'celery',
+    'SumTask': 'celery',
+    'MulTask': 'celery',
+    'FallbackTask': 'celery'
+}
+
+dispatcher_queue = 'celery'
+
+def get_task_instance(task_name, flow_name, parent, finished):
     cls = task_classes.get(task_name)
     if not cls:
         raise ValueError("Unknown task with name '%s'" % flow_name)
-    return cls(task_name=task_name, flow_name=flow_name, parent=parent)
+    return cls(task_name=task_name, flow_name=flow_name, parent=parent, finished=finished)
 
 ################################################################################
 
@@ -33,8 +45,8 @@ task2storage_mapping = {
 }
 
 _storage_SqlStorage = SqlStorage(connection_string='postgres://postgres:postgres@postgres:5432/postgres')
-_storage_RedisStorage = RedisStorage(db=1, host='redis', port=6379, charset='utf-8')
-_storage_MongoStorage = MongoStorage(db_name='database_name', collection_name='collection_name', host='mongo', port=27017)
+_storage_RedisStorage = RedisStorage(host='redis', port=6379, charset='utf-8', db=1)
+_storage_MongoStorage = MongoStorage(host='mongo', port=27017, collection_name='collection_name', db_name='database_name')
 storage2instance_mapping = {
     'SqlStorage': _storage_SqlStorage,
     'RedisStorage': _storage_RedisStorage,
@@ -48,22 +60,36 @@ def is_flow(name):
 
 ################################################################################
 
+strategy_function = functools.partial(_strategy_function, max_retry=120, start_retry=2)
+
+################################################################################
+
 output_schemas = {
 }
 
 ################################################################################
-
-propagate_finished = {
-    'mainFlow': True,
-    'factorialFlow': False
-}
 
 propagate_node_args = {
     'mainFlow': True,
     'factorialFlow': False
 }
 
+propagate_finished = {
+    'mainFlow': True,
+    'factorialFlow': False
+}
+
 propagate_parent = {
+    'mainFlow': False,
+    'factorialFlow': False
+}
+
+propagate_compound_finished = {
+    'mainFlow': False,
+    'factorialFlow': False
+}
+
+propagate_compound_parent = {
     'mainFlow': False,
     'factorialFlow': False
 }
@@ -78,19 +104,24 @@ max_retry = {
 }
 
 retry_countdown = {
-    'FactTask': 5,
-    'SumTask': 5,
-    'MulTask': 5,
-    'FallbackTask': 5
+    'FactTask': 0,
+    'SumTask': 0,
+    'MulTask': 0,
+    'FallbackTask': 0
 }
-
-################################################################################
 
 time_limit = {
     'FactTask': None,
     'SumTask': None,
     'MulTask': None,
     'FallbackTask': None
+}
+
+storage_readonly = {
+    'FactTask': False,
+    'SumTask': False,
+    'MulTask': False,
+    'FallbackTask': False
 }
 
 ################################################################################
@@ -100,8 +131,8 @@ _mainFlow_fail_SumTask = {'next': {'factorialFlow': _mainFlow_fail_SumTask_facto
 _mainFlow_fail_factorialFlow = {'next': {'SumTask': _mainFlow_fail_SumTask_factorialFlow}, 'fallback': []}
 
 _mainFlow_failure_starting_nodes = {
-    'SumTask': _mainFlow_fail_SumTask,
-    'factorialFlow': _mainFlow_fail_factorialFlow
+    'factorialFlow': _mainFlow_fail_factorialFlow,
+    'SumTask': _mainFlow_fail_SumTask
 }
 
 failures = {
@@ -117,13 +148,13 @@ nowait_nodes = {
 
 ################################################################################
 
-def init():
-    pass
+def init(config_cls):
+    return
 
 ################################################################################
 
 def _condition_mainFlow_0(db, node_args):
-    return httpStatus(status=200, path='/', host='example.com')
+    return httpStatus(host='example.com', path='/', status=200)
 
 
 def _condition_mainFlow_1(db, node_args):
@@ -136,9 +167,9 @@ def _condition_factorialFlow_0(db, node_args):
 
 def _condition_factorialFlow_1(db, node_args):
     return (
-fieldExist(message=db.get('factorialFlow', 'FactTask'), key='num') and 
+fieldExist(message=db.get('FactTask'), key='num') and 
 (not 
-fieldEqual(message=db.get('factorialFlow', 'FactTask'), key='num', value=1)))
+fieldEqual(message=db.get('FactTask'), key='num', value=1)))
 
 
 ################################################################################

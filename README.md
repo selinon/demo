@@ -1,4 +1,5 @@
-# celeriac-demo
-Demo for Celeriac implementation
+# selinon-demo
 
-This demo uses old, devel version of Selinon (Celeriac) and is outdated now.
+Demo for Selinon implementation. Please visit [Selinon](https://github.com/fridex/selinon) for more info.
+
+
