@@ -1,0 +1,12 @@
+---
+  flow-definitions:
+    - name: flow1
+      queue: flow1_v0
+      sampling:
+        name: constant
+        args:
+          retry: 2
+      edges:
+        - from:
+          to:
+            - hello_task

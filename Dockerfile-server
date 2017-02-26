@@ -1,29 +1,26 @@
 FROM fedora:24
-MAINTAINER Fridolin Pokorny <fpokorny@redhat.com>
+MAINTAINER Fridolin Pokorny <fridolin.pokorny@redhat.com>
 ENV LANG=en_US.utf8
 
-RUN groupadd worker && useradd --create-home --home-dir /home/worker -g worker worker
+# Install server
+COPY server /tmp/server
+RUN pushd /tmp/server && \
+  pip3 install . && \
+  popd && \
+  rm -rf /tmp/server
 
-RUN dnf install -y git make graphviz python3-psycopg2
+# Install worker files, we need them mainly because of configs and Celery settings establishment
+COPY worker /tmp/worker
+RUN pushd /tmp/worker && \
+  pip3 install . && \
+  popd && \
+  rm -rf /tmp/worker
 
-COPY requirements.txt /tmp
-RUN pip3 install -r /tmp/requirements.txt
+# Install Selinonlib and Selinon manually so we have latest master
+COPY hack/install_selinon.sh /tmp/
+RUN /tmp/install_selinon.sh && rm /tmp/install_selinon.sh
 
-# Requirements for Celery 4.0
-RUN pip3 install 'https://github.com/celery/billiard/zipball/master#egg=billiard' &&\
- pip3 install 'https://github.com/celery/py-amqp/zipball/master#egg=amqp' &&\
- pip3 install 'https://github.com/celery/kombu/zipball/master#egg=kombu' &&\
- pip3 install 'https://github.com/celery/vine/zipball/master#egg=vine'
-
-# Set up Selinonlib and Selinon
-RUN pip3 install -U git+https://github.com/fridex/selinonlib \
- git+https://github.com/fridex/selinon
-
-# We use additional storages that are not listed in requirements.txt explicitly
-RUN pip3 install pymongo SQLAlchemy SQLAlchemy-Utils
-
-# Use volume
-WORKDIR /home/worker/server
-#USER worker
-
-ENTRYPOINT ["sh", "/home/worker/server/run_server.sh"]
+RUN useradd server --create-home
+WORKDIR /home/server
+USER server
+CMD ["selinon-api.py"]

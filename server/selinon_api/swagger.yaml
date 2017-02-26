@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  title: API server for Selinon demo
+  version: "0.1"
+basePath: "/api/v1/"
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /run-flow:
+    post:
+      tags: [Flow]
+      operationId: selinon_api.api_v1.post_run_flow
+      summary: Run a flow
+      parameters:
+        - $ref: "#/parameters/flow_name"
+        - $ref: "#/parameters/node_args"
+      responses:
+        201:
+          description: Flow was scheduled
+
+parameters:
+  flow_name:
+    name: flow_name
+    in: query
+    required: true
+    description: Flow name
+    type: string
+  node_args:
+    name: node_args
+    in: body
+    required: false
+    description: Flow arguments
+    schema:
+      $ref: "#/definitions/QueryKwargs"
+
+definitions:
+  QueryKwargs:
+    type: object
+    additionalProperties: true
+    example:
+      foo: "bar"
+

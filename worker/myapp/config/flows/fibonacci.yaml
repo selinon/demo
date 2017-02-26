@@ -1,0 +1,31 @@
+---
+  flow-definitions:
+    - name: fibonacci
+      queue: fibonacci_v0
+      # propagate arguments to subflows
+      propagate_node_args: true
+      # propagate information about parent tasks to subflows
+      propagate_parent: true
+      # do not wait for the subflows to finish
+      #nowait:
+      #  - 'fibonacci'
+      sampling:
+        name: constant
+        args:
+          retry: 2
+      edges:
+        - from:
+          to:
+            - fibonacci_task
+          condition:
+            name: argsFieldGreater
+            args:
+              key: 'count'
+              value: 0
+        - from: fibonacci_task
+          to: fibonacci
+          condition:
+            name: fieldGreater
+            args:
+              key: 'count'
+              value: 0

@@ -1,24 +1,21 @@
 FROM fedora:24
-MAINTAINER Fridolin Pokorny <fpokorny@redhat.com>
+MAINTAINER Fridolin Pokorny <fridolin.pokorny@gmail.com>
 ENV LANG=en_US.utf8
 
-RUN groupadd worker && useradd --create-home --home-dir /home/worker -g worker worker
+# Install worker
+COPY worker /tmp/worker
+RUN pushd /tmp/worker && \
+  pip3 install . && \
+  popd && \
+  rm -rf /tmp/worker
 
-RUN dnf install -y git make graphviz python3-psycopg2
+# Install Selinonlib and Selinon manually so we have latest master,
+COPY hack/install_selinon.sh /tmp/
+RUN /tmp/install_selinon.sh && rm /tmp/install_selinon.sh
 
-COPY requirements.txt /tmp
-RUN pip3 install -r /tmp/requirements.txt
+COPY hack/worker.sh /usr/bin/
 
-# Set up Selinonlib and Selinon
-RUN pip3 install -U git+https://github.com/fridex/selinonlib && \
- pip3 install -U git+https://github.com/fridex/selinon
-
-# We use additional storages that are not listed in requirements.txt explicitly
-RUN pip3 install pymongo SQLAlchemy SQLAlchemy-Utils
-
-# Use volume
-WORKDIR /home/worker/worker
+RUN useradd worker --create-home
+WORKDIR /home/worker
 USER worker
-
-ENTRYPOINT ["celery"]
-CMD ["worker", "--app=tasks", "-l", "INFO", "--concurrency=1"]
+CMD ["worker.sh"]

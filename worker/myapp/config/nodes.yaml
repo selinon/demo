@@ -1,0 +1,59 @@
+---
+  tasks:
+    - name: hello_task
+      classname: HelloTask
+      import: myapp.tasks
+      max_retry: 0
+      queue: task1_v0
+
+    - name: fibonacci_task
+      classname: FibonacciTask
+      import: myapp.tasks
+      max_retry: 0
+      queue: fibonacciTask_v0
+      storage: Redis
+
+  flows:
+    - flow1
+    - fibonacci
+
+  storages:
+    #- name: MongoDB
+    #  classname: MongoStorage
+    #  import: selinonlib.storages.mongo
+    #  configuration:
+    #    db_name: selinon
+    #    collection_name: demo
+    #    host: "mongo"
+    #    port: 27017
+
+    - name: Redis
+      classname: RedisStorage
+      import: selinonlib.storages.redis
+      configuration:
+        host: "redis"
+        port: 6379
+        db: 1
+        charset: 'utf-8'
+
+    #- name: PostgreSQL
+    #  classname: SqlStorage
+    #  import: selinonlib.storages.sqlStorage
+    #  configuration:
+    #    connection_string: postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+
+    #- name: AmazonS3
+    #  classname: S3
+    #  import: selinonlib.storages.s3
+    #  configuration:
+    #    bucket: selinon
+    #    region_name: us-east-1
+    #    location: us-east-1
+    #    endpoint_url: http://selinon-s3:8084
+    #    use_ssl: false
+    #    aws_access_key_id: E5UENY2EOTV2U7DP0ODQ
+    #    aws_secret_access_key: tfIv8oNKIpfwGYlUe8ZErnMXZzOxPhVagKBiE6qV
+
+  global:
+    # trace using Python's logging
+    trace: true
