@@ -2,6 +2,8 @@
 
 Demo for Selinon implementation. Please visit [Selinon](https://github.com/selinon/selinon) for more info.
 
+Is this project helpful? [Send me a simple warm message](https://saythanks.io/to/fridex)!
+
 ## Running
 
 Just clone the repo and run prepared docker-compose:
