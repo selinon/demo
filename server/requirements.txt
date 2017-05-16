@@ -14,7 +14,7 @@ codegen==1.0              # via selinonlib
 connexion==1.1.9
 dill==0.2.6               # via selinonlib
 Flask==0.12.2               # via connexion
-graphviz==0.7           # via selinonlib
+graphviz==0.7.1           # via selinonlib
 itsdangerous==0.24        # via flask
 Jinja2==2.9.6             # via flask
 jsonschema==2.6.0         # via connexion, selinon, swagger-spec-validator
