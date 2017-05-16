@@ -12,7 +12,7 @@ celery==4.0.2             # via selinon
 codegen==1.0              # via selinonlib
 dill==0.2.6               # via selinonlib
 docutils==0.13.1          # via botocore
-graphviz==0.7           # via selinonlib
+graphviz==0.7.1           # via selinonlib
 jmespath==0.9.2           # via boto3, botocore
 jsonschema==2.6.0         # via selinon
 kombu==4.0.2              # via celery
