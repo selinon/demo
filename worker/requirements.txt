@@ -22,8 +22,8 @@ pytz==2017.2             # via celery
 pyyaml==3.12              # via selinonlib
 redis==2.10.5             # via selinon
 s3transfer==0.1.10        # via boto3
-selinon==0.1.0rc3
-selinonlib==0.1.0rc3      # via selinon
+selinon==0.1.0rc4
+selinonlib==0.1.0rc4      # via selinon
 six==1.10.0               # via python-dateutil, sqlalchemy-utils
 SQLAlchemy-Utils==0.32.14
 SQLAlchemy==1.1.10         # via sqlalchemy-utils
