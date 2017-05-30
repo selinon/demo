@@ -25,7 +25,7 @@ pyparsing==2.2.0         # via packaging
 pytz==2017.2             # via celery
 PyYAML==3.12              # via clickclick, connexion, selinonlib
 redis==2.10.5             # via selinon
-requests==2.16.5          # via connexion
+requests==2.17.3          # via connexion
 selinon==0.1.0rc4
 selinonlib==0.1.0rc4      # via selinon
 six==1.10.0               # via connexion, packaging, setuptools, swagger-spec-validator
