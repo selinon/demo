@@ -7,7 +7,7 @@
 amqp==2.1.4               # via kombu
 billiard==3.5.0.2         # via celery
 boto3==1.4.4
-botocore==1.5.67          # via boto3, s3transfer
+botocore==1.5.68          # via boto3, s3transfer
 celery==4.0.2             # via selinon
 codegen==1.0              # via selinonlib
 dill==0.2.6               # via selinonlib
