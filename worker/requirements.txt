@@ -7,10 +7,10 @@
 amqp==2.1.4               # via kombu
 billiard==3.5.0.2         # via celery
 boto3==1.4.4
-botocore==1.5.79          # via boto3, s3transfer
+botocore==1.5.80          # via boto3, s3transfer
 celery==4.0.2             # via selinon
 codegen==1.0              # via selinonlib
-dill==0.2.6               # via selinonlib
+dill==0.2.7               # via selinonlib
 docutils==0.13.1          # via botocore
 graphviz==0.8           # via selinonlib
 jmespath==0.9.3           # via boto3, botocore
