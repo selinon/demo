@@ -17,7 +17,7 @@ jmespath==0.9.3           # via boto3, botocore
 jsonschema==2.6.0         # via selinon
 kombu==4.0.2              # via celery
 pymongo==3.4.0
-python-dateutil==2.6.0    # via botocore
+python-dateutil==2.6.1    # via botocore
 pytz==2017.2             # via celery
 pyyaml==3.12              # via selinonlib
 redis==2.10.5             # via selinon
