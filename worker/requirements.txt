@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-amqp==2.1.4               # via kombu
+amqp==2.2.0               # via kombu
 billiard==3.5.0.2         # via celery
 boto3==1.4.4
 botocore==1.5.80          # via boto3, s3transfer
