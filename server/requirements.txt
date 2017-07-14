@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-amqp==2.2.0               # via kombu
+amqp==2.2.1               # via kombu
 appdirs==1.4.3            # via setuptools
 billiard==3.5.0.2         # via celery
 celery==4.0.2             # via selinon
