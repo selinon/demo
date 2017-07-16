@@ -6,7 +6,7 @@
 #
 amqp==2.2.1               # via kombu
 appdirs==1.4.3            # via setuptools
-billiard==3.5.0.2         # via celery
+billiard==3.5.0.3         # via celery
 celery==4.0.2             # via selinon
 click==6.7                # via clickclick, flask
 clickclick==1.2.1         # via connexion
