@@ -18,7 +18,7 @@ graphviz==0.8           # via selinonlib
 itsdangerous==0.24        # via flask
 Jinja2==2.9.6             # via flask
 jsonschema==2.6.0         # via connexion, selinon, swagger-spec-validator
-kombu==4.0.2              # via celery
+kombu==4.1.0              # via celery
 MarkupSafe==1.0          # via jinja2
 packaging==16.8           # via setuptools
 pyparsing==2.2.0         # via packaging
