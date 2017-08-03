@@ -11,7 +11,7 @@ botocore==1.5.92          # via boto3, s3transfer
 celery==4.1.0             # via selinon
 codegen==1.0              # via selinonlib
 dill==0.2.7.1               # via selinonlib
-docutils==0.13.1          # via botocore
+docutils==0.14          # via botocore
 graphviz==0.8           # via selinonlib
 jmespath==0.9.3           # via boto3, botocore
 jsonschema==2.6.0         # via selinon
