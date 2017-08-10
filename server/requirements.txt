@@ -27,7 +27,7 @@ PyYAML==3.12              # via clickclick, connexion, selinonlib
 redis==2.10.5             # via selinon
 requests==2.18.3          # via connexion
 selinon==0.1.0rc4
-selinonlib==0.1.0rc4      # via selinon
+selinonlib==0.1.0rc5      # via selinon
 six==1.10.0               # via connexion, packaging, setuptools, swagger-spec-validator
 strict-rfc3339==0.7       # via connexion
 swagger-spec-validator==2.1.0  # via connexion
