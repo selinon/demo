@@ -24,7 +24,7 @@ packaging==16.8           # via setuptools
 pyparsing==2.2.0         # via packaging
 pytz==2017.2             # via celery
 PyYAML==3.12              # via clickclick, connexion, selinonlib
-redis==2.10.5             # via selinon
+redis==2.10.6             # via selinon
 requests==2.18.4          # via connexion
 selinon==0.1.0rc5
 selinonlib==0.1.0rc5      # via selinon
