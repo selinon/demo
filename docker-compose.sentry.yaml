@@ -1,0 +1,71 @@
+# Thanks to: https://gist.github.com/jensens/00f329c292fcb68861ec53abc453c5c7
+---
+version: '2'
+
+services:
+  sentry:
+    image: sentry:latest
+    depends_on:
+     - redis
+     - postgres
+    links:
+     - redis
+     - postgres
+    network_mode: bridge
+    container_name: sentry
+    ports:
+     - 9000:9000
+    environment:
+      SENTRY_SECRET_KEY: verysecret
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: postgres
+      SENTRY_DB_PASSWORD: postgres
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_DB: 3
+      SENTRY_REDIS_PORT: 6379
+
+  sentry-cron:
+    image: sentry:latest
+    depends_on:
+     - redis
+     - postgres
+    links:
+     - redis
+     - postgres
+    network_mode: bridge
+    command: "sentry run cron --pidfile=/tmp/celerybeat-sentry.pid"
+    environment:
+      SENTRY_SECRET_KEY: verysecret
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: postgres
+      SENTRY_DB_PASSWORD: postgres
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_DB: 3
+      SENTRY_REDIS_PORT: 6379
+
+  sentry-worker:
+    image: sentry:latest
+    depends_on:
+     - redis
+     - postgres
+    links:
+     - redis
+     - postgres
+    network_mode: bridge
+    command: "sentry run worker"
+    environment:
+      SENTRY_SECRET_KEY: verysecret
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: postgres
+      SENTRY_DB_PASSWORD: postgres
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_DB: 3
+      SENTRY_REDIS_PORT: 6379
+
+  worker:
+    links:
+      - broker
+      - redis
+      - mongo
+      - postgres
+      - sentry
