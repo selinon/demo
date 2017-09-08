@@ -11,7 +11,7 @@ celery==4.1.0             # via selinon
 click==6.7                # via clickclick, flask
 clickclick==1.2.2         # via connexion
 codegen==1.0              # via selinonlib
-connexion==1.1.14
+connexion==1.1.15
 dill==0.2.7.1               # via selinonlib
 Flask==0.12.2               # via connexion
 graphviz==0.8           # via selinonlib
