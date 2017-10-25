@@ -55,8 +55,6 @@ If you want to scale workers, just run (to scale to 10 workers):
 $ docker-compose scale worker=10
 ```
 
-Note that queues on message broker has to be clean, otherwise [already known Celery bug](https://github.com/celery/celery/issues/3539) can occur.
-
 ## Available services
 
 The following listing states available services that are brought by `docker-compose`.
