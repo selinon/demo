@@ -11,7 +11,9 @@ from selinon import SelinonTask
 class HelloTask(SelinonTask):
     def run(self, node_args):
         """ A simple hello world """
-        return {"result": "Hello, Selinon!"}
+        if 'name' not in node_args.keys():
+            raise ValueError("Please provide your name!")
+        return {"result": "Hello, {}!".format(node_args['name'])}
 
 
 class FibonacciTask(SelinonTask):

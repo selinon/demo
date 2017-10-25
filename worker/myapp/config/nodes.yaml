@@ -56,4 +56,9 @@
 
   global:
     # trace using Python's logging
-    trace: true
+    trace:
+      #- sentry:
+      #    # Place your DSN configuration here based on Sentry configuration.
+      #    # Don't forget to substitute "localhost" with "sentry" so failures are correctly sent to Sentry instance!
+      #    dsn: 'http://861cabdd9fad49d0a40bdb02bee16b1a:f77b4f8d16b043e5b507a7d0ae089d93@sentry:9000/2'
+      - logging: true

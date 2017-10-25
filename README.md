@@ -106,3 +106,73 @@ Amazon AWS S3 alternative with UI.
  * url: [http://localhost:8084](http://localhost:8084)
  * access key: E5UENY2EOTV2U7DP0ODQ
  * secret key: tfIv8oNKIpfwGYlUe8ZErnMXZzOxPhVagKBiE6qV
+
+### Sentry
+
+To demo Selinon's support for [Sentry monitoring](https://sentry.io), you need to configure Sentry monitoring explicitly. Don't worry - it just takes few seconds.
+
+First, you need to run Sentry for the first time to create expected tables and relations in the database. To do so, first run system with Sentry instance:
+
+```
+$ docker-compose -f docker-compose.yaml -f docker-compose.sentry.yaml up
+```
+
+This will run system with Sentry that will be available at [http://localhost:9000](http://localhost:9000). You will not be able to log in as you need to create a user first. To create a user, run in another shell (while the system is up):
+
+```
+$ docker-compose -f docker-compose.yaml -f docker-compose.sentry.yaml run sentry sentry upgrade
+```
+
+This will run database migrations and prepare Sentry for the initial run. Once database tables are created, the upgrade command will prompt you to create a new user:
+
+```
+...
+ > sentry:0357_auto__add_projectteam__add_unique_projectteam_project_team
+Created internal Sentry project (slug=internal, id=1)
+
+Would you like to create a user account now? [Y/n]: y
+Email: fridex@example.com
+Password: ****
+Repeat for confirmation: ****
+Should this user be a superuser? [y/N]: y
+User created: fridex@example.com
+Added to organization: sentry
+ - Loading initial data for sentry.
+...
+```
+
+After that your Sentry instance is configured. Open [http://localhost:9000](http://localhost:9000), log in with e-mail and password and proceed with Welcome screen (default values are just fine). Once you confirm the Welcome screen, click on the "New Project" button in the top right corner, select "Python", optionally adjust project name and click on "Create Project".
+
+A new screen will appear with initial instructions on how to set up Python based application monitoring. In the example, copy [Sentry's DSN](https://docs.sentry.io/quickstart/#configure-the-dsn), it should look similarly to the following example:
+
+```
+http://5305e373726b40ca894d8cfd121dea34:78c848fac46040d1a3218cc0bf8ef6a7@localhost:9000/2
+```
+
+Copy the whole link and place this DSN to worker's [nodes.yaml](https://github.com/selinon/demo/blob/master/worker/myapp/config/nodes.yaml) configuration file so worker is able to report errors to Sentry instance.
+
+Uncomment configuration entry in the `trace` configuration in `global` configuration section and substitute DSN with the copied one.
+
+The last important step is to substitute `localhost` with `sentry` so worker can reach to Sentry in the docker-compose setup. Once you are done with editing `nodes.yaml`, restart the whole system and worker should be able to report any task failures to Sentry monitoring service.
+
+The DSN listed above would be amended as follows (just replace `localhost` with `sentry`):
+
+```
+http://5305e373726b40ca894d8cfd121dea34:78c848fac46040d1a3218cc0bf8ef6a7@sentry:9000/2
+```
+
+And the appropriate configuration entry would be:
+
+```yaml
+    trace:
+      - sentry:
+          dsn: 'http://5305e373726b40ca894d8cfd121dea34:78c848fac46040d1a3218cc0bf8ef6a7@sentry:9000/2'
+      # You can keep logging to stdout/stderr as well so you still see what is going on in the system:
+      - logging: true
+```
+
+ * url: [http://localhost:9000](http://localhost:9000)
+ * login: based on your initial setup
+ * password: based on your initial setup
+
+Note that Selinon reports only task failures (event `TASK_FAILURE`). Any other failures are ignored by default. See [Selinon docs](http://selinon.readthedocs.io/en/latest/trace.html) for more info.
