@@ -33,7 +33,7 @@ rainbow-logging-handler==2.2.2  # via selinonlib
 raven==6.3.0
 redis==2.10.6             # via selinon
 requests==2.18.4          # via connexion
-selinon==0.1.0rc5
+selinon==0.1.0rc6
 selinonlib==0.1.0rc6      # via selinon
 six==1.11.0               # via connexion, swagger-spec-validator
 swagger-spec-validator==2.1.0  # via connexion
