@@ -8,7 +8,7 @@ amqp==2.2.2               # via amqp, kombu
 argcomplete==1.9.2        # via selinonlib
 billiard==3.5.0.3         # via billiard, celery
 celery==4.1.0             # via celery, selinon, selinonlib
-certifi==2017.7.27.1      # via requests
+certifi==2017.11.5      # via requests
 chardet==3.0.4            # via requests
 click==6.7                # via clickclick, flask
 clickclick==1.2.2         # via connexion
