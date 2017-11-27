@@ -27,7 +27,7 @@ rainbow-logging-handler==2.2.2  # via selinonlib
 raven==6.3.0
 redis==2.10.6             # via selinon
 s3transfer==0.1.11        # via boto3
-selinon==0.1.0rc8
+selinon==0.1.0rc9
 selinonlib==0.1.0rc9      # via selinon
 six==1.11.0               # via python-dateutil, sqlalchemy-utils
 sqlalchemy-utils==0.32.21
