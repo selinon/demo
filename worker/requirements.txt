@@ -8,7 +8,7 @@ amqp==2.2.2               # via amqp, kombu
 argcomplete==1.9.3        # via selinonlib
 billiard==3.5.0.3         # via billiard, celery
 boto3==1.4.8
-botocore==1.8.8          # via boto3, s3transfer
+botocore==1.8.9          # via boto3, s3transfer
 celery==4.1.0             # via celery, selinon, selinonlib
 codegen==1.0              # via selinonlib
 colorama==0.3.9           # via rainbow-logging-handler
