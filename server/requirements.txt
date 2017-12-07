@@ -40,4 +40,4 @@ swagger-spec-validator==2.1.0  # via connexion
 typing==3.6.2             # via connexion
 urllib3==1.22             # via requests
 vine==1.1.4               # via amqp, vine
-werkzeug==0.12.2          # via flask
+werkzeug==0.13          # via flask
