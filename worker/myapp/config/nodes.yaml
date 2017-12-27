@@ -20,7 +20,7 @@
   storages:
     #- name: MongoDB
     #  classname: MongoStorage
-    #  import: selinonlib.storages.mongo
+    #  import: selinon.storages.mongo
     #  configuration:
     #    db_name: selinon
     #    collection_name: demo
@@ -28,8 +28,8 @@
     #    port: 27017
 
     - name: Redis
-      classname: RedisStorage
-      import: selinonlib.storages.redis
+      classname: Redis
+      import: selinon.storages.redis
       configuration:
         host: "redis"
         port: 6379
@@ -38,13 +38,13 @@
 
     #- name: PostgreSQL
     #  classname: SqlStorage
-    #  import: selinonlib.storages.sqlStorage
+    #  import: selinon.storages.sqlStorage
     #  configuration:
     #    connection_string: postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
 
     #- name: AmazonS3
     #  classname: S3
-    #  import: selinonlib.storages.s3
+    #  import: selinon.storages.s3
     #  configuration:
     #    bucket: selinon
     #    region_name: us-east-1
@@ -61,4 +61,4 @@
       #    # Place your DSN configuration here based on Sentry configuration.
       #    # Don't forget to substitute "localhost" with "sentry" so failures are correctly sent to Sentry instance!
       #    dsn: 'http://861cabdd9fad49d0a40bdb02bee16b1a:f77b4f8d16b043e5b507a7d0ae089d93@sentry:9000/2'
-      - logging: true
+      - json: true

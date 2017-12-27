@@ -5,39 +5,32 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 amqp==2.2.2               # via amqp, kombu
-argcomplete==1.9.3        # via selinonlib
 billiard==3.5.0.3         # via billiard, celery
-celery==4.1.0             # via celery, selinon, selinonlib
-certifi==2017.11.5      # via requests
+celery==4.1.0             # via celery, selinon
+certifi==2017.11.5        # via requests
 chardet==3.0.4            # via requests
-click==6.7                # via clickclick, flask
+click==6.7                # via clickclick, flask, selinon
 clickclick==1.2.2         # via connexion
-codegen==1.0              # via selinonlib
+codegen==1.0              # via selinon
 colorama==0.3.9           # via rainbow-logging-handler
 connexion==1.2
 flask==0.12.2             # via connexion
-flexmock==0.10.2          # via selinonlib
-graphviz==0.8.1           # via selinonlib
+graphviz==0.8.1           # via selinon
 idna==2.6                 # via requests
 inflection==0.3.1         # via connexion
 itsdangerous==0.24        # via flask
-jinja2==2.10             # via flask
+jinja2==2.10              # via flask, jinja2
 jsonschema==2.6.0         # via connexion, selinon, swagger-spec-validator
 kombu==4.1.0              # via celery, kombu
 logutils==0.3.5           # via rainbow-logging-handler
 markupsafe==1.0           # via jinja2
-pathlib==1.0.1            # via connexion
-pytz==2017.3              # via celery
-pyyaml==3.12              # via clickclick, connexion, selinonlib
-rainbow-logging-handler==2.2.2  # via selinonlib
-raven==6.4.0
-redis==2.10.6             # via selinon
+pytz==2017.3              # via celery, pytz
+pyyaml==3.12              # via clickclick, connexion, selinon
+rainbow-logging-handler==2.2.2  # via selinon
 requests==2.18.4          # via connexion
-selinon==1.0.0rc2
-selinonlib==1.0.0rc1      # via selinon
+selinon[celery]==1.0.0rc3
 six==1.11.0               # via connexion, swagger-spec-validator
 swagger-spec-validator==2.1.0  # via connexion
-typing==3.6.2             # via connexion
 urllib3==1.22             # via requests
 vine==1.1.4               # via amqp, vine
-werkzeug==0.13          # via flask
+werkzeug==0.13            # via flask

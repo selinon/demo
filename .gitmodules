@@ -1,6 +1,3 @@
 [submodule "selinon"]
 	path = selinon
 	url = https://github.com/selinon/selinon.git
-[submodule "selinonlib"]
-	path = selinonlib
-	url = https://github.com/selinon/selinonlib.git

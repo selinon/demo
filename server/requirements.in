@@ -1,3 +1,2 @@
 connexion>=1.0.31
-selinon
-raven
+selinon[celery]
