@@ -1,8 +1,1 @@
-selinon
-# We are using following db adapters
-pymongo
-SQLAlchemy
-SQLAlchemy-Utils
-boto3
-# For Sentry monitoring
-raven
+selinon[celery,mongodb,postgresql,redis,s3,sentry]

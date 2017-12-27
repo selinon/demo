@@ -5,31 +5,29 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 amqp==2.2.2               # via amqp, kombu
-argcomplete==1.9.3        # via selinonlib
 billiard==3.5.0.3         # via billiard, celery
-boto3==1.5.6
-botocore==1.8.20          # via boto3, s3transfer
-celery==4.1.0             # via celery, selinon, selinonlib
-codegen==1.0              # via selinonlib
+boto3==1.5.6              # via boto3, selinon
+botocore==1.8.20          # via boto3, botocore, s3transfer
+celery==4.1.0             # via celery, selinon
+click==6.7                # via selinon
+codegen==1.0              # via selinon
 colorama==0.3.9           # via rainbow-logging-handler
 docutils==0.14            # via botocore
-flexmock==0.10.2          # via selinonlib
-graphviz==0.8.1           # via selinonlib
+graphviz==0.8.1           # via selinon
 jmespath==0.9.3           # via boto3, botocore
 jsonschema==2.6.0         # via selinon
 kombu==4.1.0              # via celery, kombu
 logutils==0.3.5           # via rainbow-logging-handler
-pymongo==3.6.0
+pymongo==3.6.0            # via pymongo, selinon
 python-dateutil==2.6.1    # via botocore
-pytz==2017.3              # via celery
-pyyaml==3.12              # via selinonlib
-rainbow-logging-handler==2.2.2  # via selinonlib
-raven==6.4.0
+pytz==2017.3              # via celery, pytz
+pyyaml==3.12              # via selinon
+rainbow-logging-handler==2.2.2  # via selinon
+raven==6.4.0              # via raven, selinon
 redis==2.10.6             # via selinon
-s3transfer==0.1.12        # via boto3
-selinon==1.0.0rc2
-selinonlib==1.0.0rc1      # via selinon
+s3transfer==0.1.12        # via boto3, s3transfer
+selinon[celery,mongodb,postgresql,redis,s3,sentry]==1.0.0rc3
 six==1.11.0               # via python-dateutil, sqlalchemy-utils
-sqlalchemy-utils==0.32.21
-sqlalchemy==1.1.15        # via sqlalchemy-utils
+sqlalchemy-utils==0.32.21  # via selinon, sqlalchemy-utils
+sqlalchemy==1.1.15        # via selinon, sqlalchemy, sqlalchemy-utils
 vine==1.1.4               # via amqp, vine

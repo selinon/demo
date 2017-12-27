@@ -18,7 +18,6 @@ services:
     volumes:
       - ./worker/myapp:/usr/lib/python3.5/site-packages/myapp:ro,z
       - ./selinon/selinon:/usr/lib/python3.5/site-packages/selinon:ro,z
-      - ./selinonlib/selinonlib:/usr/lib/python3.5/site-packages/selinonlib:ro,z
     environment:
       SERVICE_PORT: 34000
       BROKER_URL: amqp://broker:5672
@@ -36,7 +35,6 @@ services:
     volumes:
       - ./worker/myapp:/usr/lib/python3.5/site-packages/myapp:ro,z
       - ./selinon/selinon:/usr/lib/python3.5/site-packages/selinon:ro,z
-      - ./selinonlib/selinonlib:/usr/lib/python3.5/site-packages/selinonlib:ro,z
     environment:
       BROKER_URL: amqp://broker:5672
       RESULT_BACKEND_URL: redis://redis:6379/0
