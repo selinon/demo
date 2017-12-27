@@ -7,8 +7,8 @@
 amqp==2.2.2               # via amqp, kombu
 argcomplete==1.9.3        # via selinonlib
 billiard==3.5.0.3         # via billiard, celery
-boto3==1.4.8
-botocore==1.8.11          # via boto3, s3transfer
+boto3==1.5.6
+botocore==1.8.20          # via boto3, s3transfer
 celery==4.1.0             # via celery, selinon, selinonlib
 codegen==1.0              # via selinonlib
 colorama==0.3.9           # via rainbow-logging-handler
@@ -24,10 +24,10 @@ python-dateutil==2.6.1    # via botocore
 pytz==2017.3              # via celery
 pyyaml==3.12              # via selinonlib
 rainbow-logging-handler==2.2.2  # via selinonlib
-raven==6.3.0
+raven==6.4.0
 redis==2.10.6             # via selinon
 s3transfer==0.1.12        # via boto3
-selinon==1.0.0rc1
+selinon==1.0.0rc2
 selinonlib==1.0.0rc1      # via selinon
 six==1.11.0               # via python-dateutil, sqlalchemy-utils
 sqlalchemy-utils==0.32.21
