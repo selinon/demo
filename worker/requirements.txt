@@ -6,8 +6,8 @@
 #
 amqp==2.2.2               # via amqp, kombu
 billiard==3.5.0.3         # via billiard, celery
-boto3==1.5.15              # via boto3, selinon
-botocore==1.8.29          # via boto3, botocore, s3transfer
+boto3==1.5.16              # via boto3, selinon
+botocore==1.8.30          # via boto3, botocore, s3transfer
 celery==4.1.0             # via celery, selinon
 click==6.7                # via selinon
 codegen==1.0              # via selinon
