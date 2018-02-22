@@ -28,7 +28,7 @@ pytz==2018.3              # via celery, pytz
 pyyaml==3.12              # via clickclick, connexion, selinon
 rainbow-logging-handler==2.2.2  # via selinon
 requests==2.18.4          # via connexion
-selinon[celery]==1.0.0rc3
+selinon[celery]==1.0.0rc4
 six==1.11.0               # via connexion, swagger-spec-validator
 swagger-spec-validator==2.1.0  # via connexion
 urllib3==1.22             # via requests
