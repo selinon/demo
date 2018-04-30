@@ -14,7 +14,7 @@ clickclick==1.2.2         # via connexion
 codegen==1.0              # via selinon
 colorama==0.3.9           # via rainbow-logging-handler
 connexion==1.4
-flask==1.0             # via connexion
+flask==1.0.1             # via connexion
 graphviz==0.8.3           # via selinon
 idna==2.6                 # via requests
 inflection==0.3.1         # via connexion
