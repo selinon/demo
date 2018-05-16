@@ -1,5 +1,7 @@
 # selinon-demo
 
+# THIS DEMO IS OBSOLETED AND NO LONGER MAINTAINED, PLEASE SEE [demo-deployment](https://github.com/selinon/demo-deployment) FOR NEW DEMO.
+
 Demo for Selinon implementation. Please visit [Selinon](https://github.com/selinon/selinon) for more info.
 
 Is this project helpful? [Send me a simple warm message](https://saythanks.io/to/fridex)!
