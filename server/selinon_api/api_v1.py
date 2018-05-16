@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 def post_run_flow(flow_name, node_args=None):
-    """ Handler called on POST on /api/v1/run-flow
+    """Handler called on POST on /api/v1/run-flow.
 
     :param flow_name: name of flow to be run
     :param node_args: arguments supplied to flow
@@ -21,4 +21,4 @@ def post_run_flow(flow_name, node_args=None):
     """
     logger.info("Scheduling flow '%s' with node_args: '%s'", flow_name, node_args)
     dispatcher = Connection.run_selinon_flow(flow_name, node_args)
-    return {"dispatcher_id": dispatcher.id, "flow_name": flow_name}, 201
+    return {"dispatcher_id": dispatcher.id, "flow_name": flow_name, "node_args": node_args}, 201
