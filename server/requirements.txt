@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-amqp==2.3.1               # via amqp, kombu
+amqp==2.3.2               # via amqp, kombu
 billiard==3.5.0.3         # via billiard, celery
 celery==4.1.1             # via celery, selinon
 certifi==2018.4.16        # via requests
@@ -21,7 +21,7 @@ inflection==0.3.1         # via connexion
 itsdangerous==0.24        # via flask
 jinja2==2.10              # via flask, jinja2
 jsonschema==2.6.0         # via connexion, selinon, swagger-spec-validator
-kombu==4.2.0              # via celery, kombu
+kombu==4.2.1              # via celery, kombu
 logutils==0.3.5           # via rainbow-logging-handler
 markupsafe==1.0           # via jinja2
 pytz==2018.4              # via celery, pytz
