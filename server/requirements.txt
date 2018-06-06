@@ -30,7 +30,7 @@ rainbow-logging-handler==2.2.2  # via selinon
 requests==2.18.4          # via connexion
 selinon[celery]==1.0.0rc4
 six==1.11.0               # via connexion, swagger-spec-validator
-swagger-spec-validator==2.2.0  # via connexion
+swagger-spec-validator==2.3.0  # via connexion
 urllib3==1.23             # via requests
 vine==1.1.4               # via amqp, vine
 werkzeug==0.14.1            # via flask
