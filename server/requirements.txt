@@ -5,7 +5,7 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 amqp==2.3.2               # via amqp, kombu
-billiard==3.5.0.3         # via billiard, celery
+billiard==3.5.0.4         # via billiard, celery
 celery==4.2.0             # via celery, selinon
 certifi==2018.4.16        # via requests
 chardet==3.0.4            # via requests
