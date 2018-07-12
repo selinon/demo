@@ -6,8 +6,8 @@
 #
 amqp==2.3.2               # via amqp, kombu
 billiard==3.5.0.4         # via billiard, celery
-boto3==1.7.56              # via boto3, selinon
-botocore==1.10.56          # via boto3, botocore, s3transfer
+boto3==1.7.57              # via boto3, selinon
+botocore==1.10.57          # via boto3, botocore, s3transfer
 celery==4.2.0             # via celery, selinon
 click==6.7                # via selinon
 codegen==1.0              # via selinon
@@ -21,7 +21,7 @@ logutils==0.3.5           # via rainbow-logging-handler
 pymongo==3.7.0            # via pymongo, selinon
 python-dateutil==2.7.3    # via botocore
 pytz==2018.5              # via celery, pytz
-pyyaml==4.1              # via selinon
+pyyaml==3.13              # via selinon
 rainbow-logging-handler==2.2.2  # via selinon
 raven==6.9.0              # via raven, selinon
 redis==2.10.6             # via selinon
