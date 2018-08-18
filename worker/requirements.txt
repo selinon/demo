@@ -13,7 +13,7 @@ click==6.7                # via selinon
 codegen==1.0              # via selinon
 colorama==0.3.9           # via rainbow-logging-handler
 docutils==0.14            # via botocore
-graphviz==0.8.4           # via selinon
+graphviz==0.9           # via selinon
 jmespath==0.9.3           # via boto3, botocore
 jsonschema==2.6.0         # via selinon
 kombu==4.2.1              # via celery, kombu
