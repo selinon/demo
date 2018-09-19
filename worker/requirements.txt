@@ -29,5 +29,5 @@ s3transfer==0.1.13        # via boto3, s3transfer
 selinon[celery,mongodb,postgresql,redis,s3,sentry]==1.0.0
 six==1.11.0               # via python-dateutil, sqlalchemy-utils
 sqlalchemy-utils==0.33.4  # via selinon, sqlalchemy-utils
-sqlalchemy==1.2.11        # via selinon, sqlalchemy, sqlalchemy-utils
+sqlalchemy==1.2.12        # via selinon, sqlalchemy, sqlalchemy-utils
 vine==1.1.4               # via amqp, vine
