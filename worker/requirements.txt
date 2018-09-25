@@ -9,7 +9,7 @@ billiard==3.5.0.4         # via billiard, celery
 boto3==1.9.10              # via boto3, selinon
 botocore==1.12.10          # via boto3, botocore, s3transfer
 celery==4.2.1             # via celery, selinon
-click==6.7                # via selinon
+click==7.0                # via selinon
 codegen==1.0              # via selinon
 colorama==0.3.9           # via rainbow-logging-handler
 docutils==0.14            # via botocore
