@@ -12,7 +12,7 @@ chardet==3.0.4            # via requests
 click==7.0                # via clickclick, flask, selinon
 clickclick==1.2.2         # via connexion
 codegen==1.0              # via selinon
-colorama==0.3.9           # via rainbow-logging-handler
+colorama==0.4.0           # via rainbow-logging-handler
 connexion==1.5.3
 flask==1.0.2             # via connexion
 graphviz==0.9           # via selinon
