@@ -27,7 +27,7 @@ markupsafe==1.0           # via jinja2
 pytz==2018.5              # via celery, pytz
 pyyaml==3.13              # via clickclick, connexion, selinon
 rainbow-logging-handler==2.2.2  # via selinon
-requests==2.19.1          # via connexion
+requests==2.20.0          # via connexion
 selinon[celery]==1.0.0
 six==1.11.0               # via connexion, swagger-spec-validator
 swagger-spec-validator==2.4.1  # via connexion
