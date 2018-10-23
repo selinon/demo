@@ -15,7 +15,7 @@ codegen==1.0              # via selinon
 colorama==0.4.0           # via rainbow-logging-handler
 connexion==1.5.3
 flask==1.0.2             # via connexion
-graphviz==0.9           # via selinon
+graphviz==0.10           # via selinon
 idna==2.7                 # via requests
 inflection==0.3.1         # via connexion
 itsdangerous==1.0.0        # via flask
